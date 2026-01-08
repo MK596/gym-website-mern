@@ -38,7 +38,7 @@ const Trainers = () => {
                                 <Card className="h-100 bg-transparent border-0">
                                     {/* Image Container */}
                                     <div className="position-relative mb-4" style={{ height: '450px' }}>
-                                        <div className="position-absolute w-100 h-100 border border-secondary" style={{ top: '15px', left: '15px', zIndex: 0 }}></div>
+                                        <div className="position-absolute w-100 h-100 border border-primary" style={{ top: '15px', left: '15px', zIndex: 0 }}></div>
                                         <Card.Img
                                             variant="top"
                                             src={trainer.image}
