@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Card, Spinner, Alert, Badge, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Spinner, Alert, Badge } from 'react-bootstrap';
 import axios from 'axios';
-import { FaInstagram, FaTwitter, FaLinkedin, FaStar, FaQuoteLeft } from 'react-icons/fa';
+import { FaInstagram, FaTwitter, FaLinkedin, FaQuoteLeft, FaCertificate } from 'react-icons/fa';
 
 const Trainers = () => {
     const [trainers, setTrainers] = useState([]);
@@ -23,66 +23,66 @@ const Trainers = () => {
     }, []);
 
     return (
-        <div>
-            {/* Page Header */}
-            <div className="page-header" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=2069')" }}>
-                <div className="page-header-content">
-                    <h1 className="display-3 fw-bold text-neon animate__animated animate__fadeInDown">MEET THE COACHES</h1>
-                    <p className="lead text-white animate__animated animate__fadeInUp">Expert guidance to help you reach your peak.</p>
-                </div>
-            </div>
+        <div className="trainers-page bg-black min-vh-100">
 
-            <Container className="py-5">
+
+            <Container className="pb-5" style={{ paddingTop: '120px' }}>
                 {loading ? (
                     <div className="text-center py-5"><Spinner animation="border" variant="primary" /></div>
                 ) : error ? (
                     <Alert variant="danger">{error}</Alert>
                 ) : (
-                    <Row>
+                    <Row className="g-5">
                         {trainers.map((trainer) => (
-                            <Col key={trainer._id} md={6} lg={4} className="mb-5">
-                                <Card className="h-100 bg-dark text-white border-0 shadow-lg trainer-card position-relative overflow-hidden">
-                                    {/* Image Section */}
-                                    <div className="trainer-img-wrapper position-relative">
-                                        <Card.Img variant="top" src={trainer.image} style={{ objectFit: 'cover', height: '400px' }} />
-                                        <div className="trainer-overlay">
+                            <Col key={trainer._id} md={6} lg={4}>
+                                <Card className="h-100 bg-transparent border-0">
+                                    {/* Image Container */}
+                                    <div className="position-relative mb-4" style={{ height: '450px' }}>
+                                        <div className="position-absolute w-100 h-100 border border-secondary" style={{ top: '15px', left: '15px', zIndex: 0 }}></div>
+                                        <Card.Img
+                                            variant="top"
+                                            src={trainer.image}
+                                            className="h-100 w-100 position-relative"
+                                            style={{ objectFit: 'cover', zIndex: 1 }}
+                                        />
+                                        <div className="position-absolute bottom-0 start-0 w-100 p-4 bg-gradient-to-t from-black" style={{ zIndex: 2, background: 'linear-gradient(to top, rgba(0,0,0,0.9), transparent)' }}>
                                             <div className="d-flex gap-3 justify-content-center">
-                                                {trainer.socials?.instagram && <a href={`https://instagram.com/${trainer.socials.instagram}`} className="social-icon"><FaInstagram /></a>}
-                                                {trainer.socials?.twitter && <a href={`https://twitter.com/${trainer.socials.twitter}`} className="social-icon"><FaTwitter /></a>}
-                                                {trainer.socials?.linkedin && <a href={`https://linkedin.com/in/${trainer.socials.linkedin}`} className="social-icon"><FaLinkedin /></a>}
+                                                {trainer.socials?.instagram && <a href={`https://instagram.com/${trainer.socials.instagram}`} className="text-white hover-primary transition-all"><FaInstagram size={20} /></a>}
+                                                {trainer.socials?.twitter && <a href={`https://twitter.com/${trainer.socials.twitter}`} className="text-white hover-primary transition-all"><FaTwitter size={20} /></a>}
+                                                {trainer.socials?.linkedin && <a href={`https://linkedin.com/in/${trainer.socials.linkedin}`} className="text-white hover-primary transition-all"><FaLinkedin size={20} /></a>}
                                             </div>
                                         </div>
                                     </div>
 
-                                    <Card.Body className="text-center p-4">
-                                        <h3 className="text-neon fw-bold mb-1">{trainer.name}</h3>
-                                        <p className="text-muted text-uppercase small mb-3 letter-spacing-2">{trainer.specialization}</p>
+                                    {/* Info */}
+                                    <div className="text-center">
+                                        <h3 className="text-white text-uppercase fw-bold mb-1">{trainer.name}</h3>
+                                        <p className="text-primary text-uppercase letter-spacing-2 small mb-3">{trainer.specialization}</p>
 
-                                        <div className="mb-3">
-                                            {[...Array(5)].map((_, i) => (
-                                                <FaStar key={i} className={i < Math.round(trainer.rating || 5) ? "text-warning" : "text-muted"} size={14} />
-                                            ))}
-                                            <span className="ms-2 text-muted small">({trainer.experience})</span>
+                                        <div className="d-flex justify-content-center mb-4">
+                                            <FaQuoteLeft className="text-secondary opacity-25 me-2" size={12} />
+                                            <p className="text-secondary small fst-italic mb-0" style={{ maxWidth: '80%' }}>"{trainer.bio.substring(0, 80)}..."</p>
                                         </div>
 
-                                        <div className="mb-3">
-                                            <FaQuoteLeft className="text-neon opacity-50 mb-2" />
-                                            <p className="text-gray small fst-italic">"{trainer.bio}"</p>
-                                        </div>
-
-                                        {/* Certifications Badges */}
-                                        <div className="d-flex flex-wrap justify-content-center gap-2 mt-auto">
-                                            {trainer.certifications && trainer.certifications.map((cert, index) => (
-                                                <Badge key={index} bg="secondary" className="fw-normal">{cert}</Badge>
+                                        <div className="d-flex flex-wrap justify-content-center gap-2">
+                                            {trainer.certifications && trainer.certifications.slice(0, 2).map((cert, index) => (
+                                                <Badge key={index} bg="dark" className="border border-secondary fw-normal text-secondary rounded-0 px-2 py-1">
+                                                    <FaCertificate className="me-1 text-primary" size={10} /> {cert}
+                                                </Badge>
                                             ))}
                                         </div>
-                                    </Card.Body>
+                                    </div>
                                 </Card>
                             </Col>
                         ))}
                     </Row>
                 )}
             </Container>
+            <style>
+                {`
+                    .hover-primary:hover { color: var(--primary-color) !important; }
+                `}
+            </style>
         </div>
     );
 };

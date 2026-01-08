@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Card, Spinner, Alert, Form } from 'react-bootstrap';
+import { Container, Row, Col, Card, Spinner, Alert, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
-import { FaCheck } from 'react-icons/fa';
-import { SiVisa, SiMastercard, SiPhonepe, SiPaytm } from 'react-icons/si';
+import { FaCheck, FaTimes } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Membership = () => {
     const [plans, setPlans] = useState([]);
@@ -25,73 +25,105 @@ const Membership = () => {
     }, []);
 
     return (
-        <Container className="py-5 mt-5">
-            <div className="text-center mb-5">
-                <h1 className="text-neon fw-bold">MEMBERSHIP PLANS</h1>
-                <p className="text-muted lead">Choose the plan that suits your fitness journey</p>
+        <div className="membership-page bg-black min-vh-100 position-relative">
+            {/* Header Section */}
+            <section className="position-relative text-center border-bottom border-secondary" style={{ paddingTop: '140px', paddingBottom: '80px', background: '#050505' }}>
+                <Container>
+                    <h5 className="text-primary text-uppercase letter-spacing-2 fw-bold mb-3">Join The Elite</h5>
+                    <h1 className="display-3 fw-bold text-white text-uppercase mb-4">Invest In <span className="text-outline-white" style={{ WebkitTextStroke: '1px #fff', color: 'transparent' }}>Yourself</span></h1>
+                    <p className="text-secondary fs-5 mb-5" style={{ maxWidth: '600px', margin: '0 auto' }}>
+                        No hidden fees. No restrictive contracts. Just straightforward access to the best training facility in the city.
+                    </p>
 
-                <div className="d-flex justify-content-center align-items-center gap-3 mt-4">
-                    <span className={billingCycle === 'monthly' ? 'text-white fw-bold' : 'text-muted'}>Monthly</span>
-                    <Form.Check
-                        type="switch"
-                        id="billing-switch"
-                        className="fs-4"
-                        checked={billingCycle === 'yearly'}
-                        onChange={() => setBillingCycle(billingCycle === 'monthly' ? 'yearly' : 'monthly')}
-                    />
-                    <span className={billingCycle === 'yearly' ? 'text-white fw-bold' : 'text-muted'}>
-                        Yearly <span className="badge bg-danger ms-1" style={{ fontSize: '0.7rem' }}>SAVE 20%</span>
-                    </span>
-                </div>
-            </div>
+                    {/* Billing Toggle */}
+                    <div className="d-inline-flex align-items-center bg-dark rounded-pill p-1 border border-secondary shadow-sm">
+                        <Button
+                            variant={billingCycle === 'monthly' ? 'primary' : 'transparent'}
+                            className={`rounded-pill px-4 py-2 fw-bold ${billingCycle === 'monthly' ? 'text-black' : 'text-white'}`}
+                            onClick={() => setBillingCycle('monthly')}
+                        >
+                            Monthly
+                        </Button>
+                        <Button
+                            variant={billingCycle === 'yearly' ? 'primary' : 'transparent'}
+                            className={`rounded-pill px-4 py-2 fw-bold ${billingCycle === 'yearly' ? 'text-black' : 'text-white'}`}
+                            onClick={() => setBillingCycle('yearly')}
+                        >
+                            Yearly <small className="opacity-75 ms-1">(-20%)</small>
+                        </Button>
+                    </div>
+                </Container>
+            </section>
 
-            {loading ? (
-                <div className="text-center"><Spinner animation="border" variant="primary" /></div>
-            ) : error ? (
-                <Alert variant="danger">{error}</Alert>
-            ) : (
-                <Row className="justify-content-center">
-                    {plans.map((plan) => (
-                        <Col key={plan._id} md={4} className="mb-4">
-                            <Card className={`h-100 bg-dark text-white shadow-lg card-hover text-center p-3 ${plan.name === 'Premium' ? 'border-primary' : 'border-secondary'}`}
-                                style={{ borderWidth: plan.name === 'Premium' ? '2px' : '1px' }}>
-
-                                {plan.name === 'Premium' && (
-                                    <div className="position-absolute top-0 start-50 translate-middle">
-                                        <span className="badge bg-primary px-3 py-2 rounded-pill text-uppercase" style={{ fontSize: '0.8rem', letterSpacing: '1px' }}>Most Popular</span>
-                                    </div>
-                                )}
-
-                                <Card.Body className="d-flex flex-column">
-                                    <h3 className="text-neon mb-3">{plan.name}</h3>
-                                    <h1 className="display-4 fw-bold mb-3">
-                                        ${billingCycle === 'yearly' ? (plan.price * 10).toFixed(2) : plan.price}
-                                        <span className="fs-6 text-muted">/{billingCycle === 'yearly' ? 'yr' : 'mo'}</span>
-                                    </h1>
-                                    <div className="flex-grow-1">
-                                        <ul className="list-unstyled text-start mx-auto" style={{ maxWidth: '250px' }}>
-                                            {plan.features.map((feature, index) => (
-                                                <li key={index} className="mb-3">
-                                                    <FaCheck className="text-success me-2" />
-                                                    {feature}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-
-                                    <div className="mt-4">
-                                        <p className="text-muted small mb-3">Visit our facility to enroll</p>
-                                        <div className="d-flex justify-content-center gap-2 text-muted opacity-50 fs-5">
-                                            <SiVisa /> <SiMastercard /> <SiPhonepe /> <SiPaytm />
+            <Container className="py-5" style={{ marginTop: '-40px' }}>
+                {loading ? (
+                    <div className="text-center py-5"><Spinner animation="border" variant="primary" /></div>
+                ) : error ? (
+                    <Alert variant="danger">{error}</Alert>
+                ) : (
+                    <Row className="justify-content-center g-4">
+                        {plans.map((plan) => (
+                            <Col key={plan._id} md={6} lg={4}>
+                                <Card className={`h-100 bg-secondary-black border-0 rounded-0 overflow-hidden transition-all hover-transform position-relative ${plan.name === 'Premium' ? 'shadow-glow' : ''}`}>
+                                    {plan.name === 'Premium' && (
+                                        <div className="bg-primary text-center text-uppercase fw-bold text-black py-1 small letter-spacing-1">
+                                            Most Popular
                                         </div>
-                                    </div>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    ))}
-                </Row>
-            )}
-        </Container>
+                                    )}
+                                    <Card.Body className="p-5 d-flex flex-column text-center">
+                                        <h4 className="text-white text-uppercase fw-bold letter-spacing-2 mb-2">{plan.name}</h4>
+                                        <div className="display-2 fw-bold text-primary mb-4">
+                                            <sup className="fs-4 text-secondary align-top me-1">$</sup>
+                                            {billingCycle === 'yearly' ? (plan.price * 10).toFixed(0) : plan.price}
+                                        </div>
+                                        <p className="text-secondary small text-uppercase letter-spacing-1 mb-5 border-bottom border-dark pb-3">
+                                            Billed {billingCycle}
+                                        </p>
+
+                                        <div className="text-start mb-5 flex-grow-1">
+                                            {plan.features.map((feature, index) => (
+                                                <div key={index} className="d-flex align-items-center mb-3">
+                                                    <div className="flex-shrink-0 text-primary me-3"><FaCheck /></div>
+                                                    <span className="text-white opacity-75">{feature}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        <Link to="/contact">
+                                            <Button
+                                                variant={plan.name === 'Premium' ? 'primary' : 'outline-light'}
+                                                className="w-100 py-3 text-uppercase fw-bold letter-spacing-1 rounded-0"
+                                            >
+                                                Select Plan
+                                            </Button>
+                                        </Link>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        ))}
+                    </Row>
+                )}
+            </Container>
+
+            {/* Simple FAQ Strip */}
+            <section className="py-5 border-top border-dark">
+                <Container className="text-center">
+                    <p className="text-secondary mb-0">
+                        Questions? Contact our membership team at <span className="text-primary cursor-pointer">join@t2kgym.com</span> or call <span className="text-white">+1 (555) 0123-4567</span>
+                    </p>
+                </Container>
+            </section>
+
+            <style>
+                {`
+                    .bg-secondary-black { background-color: #111; }
+                    .hover-transform:hover { transform: translateY(-10px); }
+                    .shadow-glow { box-shadow: 0 0 30px rgba(var(--primary-rgb), 0.2); }
+                    .text-outline-white { -webkit-text-stroke: 1px rgba(255,255,255,0.8); }
+                    .transition-all { transition: all 0.3s ease; }
+                `}
+            </style>
+        </div>
     );
 };
 

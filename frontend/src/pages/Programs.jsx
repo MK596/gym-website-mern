@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Spinner, Alert, Button, Badge } from 'react-bootstrap';
 import axios from 'axios';
-import { FaClock, FaFire, FaArrowRight } from 'react-icons/fa';
+import { FaClock, FaFire, FaArrowRight, FaDumbbell } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const Programs = () => {
@@ -29,26 +29,21 @@ const Programs = () => {
     const categories = ['All', 'Strength', 'Yoga', 'Cardio', 'CrossFit'];
 
     return (
-        <div>
-            {/* Page Header */}
-            <div className="page-header" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070')" }}>
-                <div className="page-header-content">
-                    <h1 className="display-3 fw-bold text-neon animate__animated animate__fadeInDown">TRAINING PROGRAMS</h1>
-                    <p className="lead text-white animate__animated animate__fadeInUp">Push Your Limits. Break Barriers.</p>
-                </div>
-            </div>
+        <div className="programs-page bg-black min-vh-100">
 
-            <Container className="py-5">
+
+            <Container className="pb-5" style={{ paddingTop: '120px' }}>
                 {/* Filter Section */}
                 <Row className="mb-5 justify-content-center">
-                    <Col md={8} className="text-center">
-                        <div className="btn-group flex-wrap gap-2" role="group">
+                    <Col md={10} className="text-center">
+                        <div className="d-flex flex-wrap justify-content-center gap-3">
                             {categories.map(cat => (
                                 <Button
                                     key={cat}
                                     variant={filter === cat ? "primary" : "outline-secondary"}
-                                    className="rounded-pill px-4 py-2 m-1"
+                                    className="px-4 py-2 rounded-0 text-uppercase fw-bold letter-spacing-1"
                                     onClick={() => setFilter(cat)}
+                                    style={{ minWidth: '120px' }}
                                 >
                                     {cat}
                                 </Button>
@@ -58,48 +53,49 @@ const Programs = () => {
                 </Row>
 
                 {loading ? (
-                    <div className="text-center py-5"><Spinner animation="border" variant="warning" /></div>
+                    <div className="text-center py-5"><Spinner animation="border" variant="primary" /></div>
                 ) : error ? (
                     <Alert variant="danger">{error}</Alert>
                 ) : (
-                    <Row>
+                    <Row className="g-4">
                         {filteredPrograms.map((program) => (
-                            <Col key={program._id} md={6} lg={4} className="mb-5">
-                                <Card className="h-100 bg-dark text-white border-0 shadow-lg program-card">
-                                    <div className="program-card-img-wrapper">
-                                        <Card.Img variant="top" src={program.image} style={{ objectFit: 'cover', height: '100%', width: '100%' }} />
-                                        <div className="program-overlay">
-                                            <Link to={`/programs/${program._id}`}>
-                                                <Button variant="outline-light" className="rounded-pill px-4">View Details</Button>
-                                            </Link>
+                            <Col key={program._id} md={6} lg={4}>
+                                <Card className="h-100 bg-dark text-white border border-secondary rounded-0 hover-lift">
+                                    <div className="position-relative" style={{ height: '240px', overflow: 'hidden' }}>
+                                        <Card.Img
+                                            variant="top"
+                                            src={program.image}
+                                            className="h-100 w-100"
+                                            style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }}
+                                        />
+                                        <div className="position-absolute top-0 end-0 p-3">
+                                            <Badge bg="primary" className="rounded-0 text-uppercase fw-normal letter-spacing-1 px-3 py-2">
+                                                {program.title.split(' ')[0]}
+                                            </Badge>
                                         </div>
                                     </div>
                                     <Card.Body className="d-flex flex-column p-4">
                                         <div className="d-flex justify-content-between align-items-center mb-3">
-                                            <Badge bg="warning" text="dark" className="px-3 py-2">
-                                                {program.title.includes('Yoga') ? 'Wellness' : program.title.includes('HIIT') ? 'Endurance' : 'Strength'}
-                                            </Badge>
-                                            <div className="text-muted small"><FaClock className="me-1" /> {program.duration}</div>
+                                            <div className="text-muted small d-flex align-items-center">
+                                                <FaClock className="me-2 text-primary" /> {program.duration}
+                                            </div>
+                                            <div className="text-muted small d-flex align-items-center">
+                                                <FaFire className="me-2 text-primary" /> {program.intensity || 'High'}
+                                            </div>
                                         </div>
-                                        <Card.Title className="text-neon fw-bold fs-4 mb-3">{program.title}</Card.Title>
-                                        <Card.Text className="text-gray flex-grow-1">
-                                            {program.description}
+                                        <Card.Title className="fw-bold h4 mb-3 text-uppercase">{program.title}</Card.Title>
+                                        <Card.Text className="text-secondary mb-4 flex-grow-1" style={{ fontSize: '0.95rem' }}>
+                                            {program.description.substring(0, 100)}...
                                         </Card.Text>
-                                        <div className="border-top border-secondary pt-3 mt-3 d-flex justify-content-between align-items-center">
-                                            <span className="text-white small"><FaFire className="text-danger me-1" /> {program.intensity || 'High Intensity'}</span>
-                                            <Link to={`/programs/${program._id}`} className="text-neon fw-bold text-decoration-none">
-                                                Learn More <FaArrowRight />
-                                            </Link>
-                                        </div>
+                                        <Link to={`/programs/${program._id}`}>
+                                            <Button variant="outline-primary" className="w-100 rounded-0 text-uppercase fw-bold">
+                                                View Program <FaArrowRight className="ms-2" size={12} />
+                                            </Button>
+                                        </Link>
                                     </Card.Body>
                                 </Card>
                             </Col>
                         ))}
-                        {filteredPrograms.length === 0 && (
-                            <Col className="text-center py-5">
-                                <h3 className="text-muted">No programs found for this category.</h3>
-                            </Col>
-                        )}
                     </Row>
                 )}
             </Container>

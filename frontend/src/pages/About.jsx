@@ -1,129 +1,96 @@
 import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
-import { FaCheckCircle, FaDumbbell, FaUsers, FaTrophy, FaMedal, FaHistory } from 'react-icons/fa';
+import { FaQuoteRight } from 'react-icons/fa';
 
 const About = () => {
     return (
-        <div>
-            {/* Page Header */}
-            <div className="page-header" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1593079831268-3381b0db4a77?q=80&w=2069')" }}>
-                <div className="page-header-content">
-                    <h1 className="display-3 fw-bold text-neon animate__animated animate__fadeInDown">OUR STORY</h1>
-                    <p className="lead text-white animate__animated animate__fadeInUp">Forging Legends Since 2020</p>
-                </div>
-            </div>
-
-            <Container className="py-5">
-                {/* Mission Section */}
-                <Row className="align-items-center mb-5 pb-5 border-bottom border-secondary">
-                    <Col lg={6} className="mb-4 mb-lg-0 animate__animated animate__fadeInLeft">
-                        <h4 className="text-neon text-uppercase mb-3" style={{ letterSpacing: '2px' }}>Who We Are</h4>
-                        <h2 className="display-4 fw-bold text-white mb-4">MORE THAN JUST <br /> A GYM.</h2>
-                        <p className="text-muted lead mb-4">
-                            T2K Gym isn't just a place to lift weights; it's a sanctuary for transformation. We believe in the power of discipline, community, and expert guidance to unlock human potential.
-                        </p>
-                        <div className="d-flex gap-4">
-                            <div className="d-flex align-items-center gap-3">
-                                <FaHistory className="text-neon fs-2" />
-                                <div>
-                                    <h5 className="mb-0 text-white">Est. 2020</h5>
-                                    <small className="text-muted">Years of Excellence</small>
-                                </div>
+        <div className="about-page bg-black text-white min-vh-100">
+            {/* 1. Clean Text Hero */}
+            <section className="position-relative d-flex align-items-center" style={{ minHeight: '50vh', paddingTop: '120px' }}>
+                <Container>
+                    <Row className="justify-content-center text-center">
+                        <Col lg={9}>
+                            <div className="d-inline-block px-3 py-1 border border-secondary rounded-pill mb-4">
+                                <small className="text-uppercase letter-spacing-2 text-primary fw-bold">Since 2010</small>
                             </div>
-                            <div className="d-flex align-items-center gap-3">
-                                <FaUsers className="text-neon fs-2" />
-                                <div>
-                                    <h5 className="mb-0 text-white">2000+</h5>
-                                    <small className="text-muted">Active Members</small>
-                                </div>
+                            <h1 className="display-3 fw-bold mb-4">
+                                PURSUING <span className="text-primary">PERFECTION</span> IN <br />
+                                EVERY REP.
+                            </h1>
+                            <p className="lead text-secondary fs-4 fw-light mx-auto" style={{ maxWidth: '700px' }}>
+                                T2K Gym is built on a simple foundation: quality equipment, serious training, and a community that pushes you further.
+                            </p>
+                        </Col>
+                    </Row>
+                </Container>
+            </section>
+
+            {/* 2. Cinematic Image Strip */}
+            <section className="w-100 my-5" style={{ height: '400px', overflow: 'hidden' }}>
+                <img
+                    src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop"
+                    alt="Gym Interior"
+                    className="w-100 h-100 object-fit-cover"
+                    style={{ filter: 'grayscale(100%)', objectFit: 'cover' }}
+                />
+            </section>
+
+            {/* 3. Minimal Content Grid */}
+            <section className="py-5">
+                <Container className="py-5">
+                    <Row className="g-5">
+                        <Col lg={5}>
+                            <h3 className="fw-bold mb-4 text-uppercase">T2K: TRAIN 2 KEEP</h3>
+                            <p className="text-secondary fs-5 mb-4">
+                                "Train 2 Keep" isn't just a name; it's our training methadology. We focus on sustainable, long-term strength and conditioning that serves you for life.
+                            </p>
+                            <p className="text-secondary mb-4">
+                                Located in the heart of the city, our 20,000 sq ft facility features an "Iron Pit" for heavy compound lifts, a 40m agility turf, and a recovery suite with saunas.
+                            </p>
+                            <div className="d-flex flex-wrap gap-2">
+                                {['Hammer Strength', 'Eleiko', 'Rogue', 'Life Fitness'].map(brand => (
+                                    <span key={brand} className="badge bg-dark border border-secondary text-secondary fw-normal px-3 py-2">{brand}</span>
+                                ))}
                             </div>
-                        </div>
-                    </Col>
-                    <Col lg={6} className="position-relative animate__animated animate__fadeInRight">
-                        <img
-                            src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=2069"
-                            alt="Trainer"
-                            className="img-fluid rounded shadow-lg position-relative z-2"
-                        />
-                        <div style={{
-                            position: 'absolute',
-                            top: '-20px',
-                            right: '-20px',
-                            width: '100px',
-                            height: '100px',
-                            border: '4px solid var(--primary-color)',
-                            zIndex: 1
-                        }}></div>
-                    </Col>
-                </Row>
+                        </Col>
+                        <Col lg={1}></Col>
+                        <Col lg={6}>
+                            <div className="border-start border-primary border-3 ps-4 py-2">
+                                <FaQuoteRight className="text-primary mb-3 fs-3 opacity-50" />
+                                <h4 className="fw-medium fst-italic lh-base mb-3">
+                                    "We don't sell memberships. We sell the environment you need to reach your potential. The rest is up to you."
+                                </h4>
+                                <small className="text-muted text-uppercase letter-spacing-2">— Founder, T2K Gym</small>
+                            </div>
+                        </Col>
+                    </Row>
+                </Container>
+            </section>
 
-                {/* Stats / Numbers */}
-                <Row className="mb-5 pb-5">
-                    <Col md={3} className="mb-3">
-                        <div className="stat-box text-center bg-dark">
-                            <FaTrophy className="text-neon display-4 mb-3" />
-                            <h2 className="fw-bold text-white">50+</h2>
-                            <p className="text-muted mb-0">Awards Won</p>
-                        </div>
-                    </Col>
-                    <Col md={3} className="mb-3">
-                        <div className="stat-box text-center bg-dark">
-                            <FaDumbbell className="text-neon display-4 mb-3" />
-                            <h2 className="fw-bold text-white">200+</h2>
-                            <p className="text-muted mb-0">Equipment</p>
-                        </div>
-                    </Col>
-                    <Col md={3} className="mb-3">
-                        <div className="stat-box text-center bg-dark">
-                            <FaMedal className="text-neon display-4 mb-3" />
-                            <h2 className="fw-bold text-white">15+</h2>
-                            <p className="text-muted mb-0">Expert Trainers</p>
-                        </div>
-                    </Col>
-                    <Col md={3} className="mb-3">
-                        <div className="stat-box text-center bg-dark">
-                            <FaUsers className="text-neon display-4 mb-3" />
-                            <h2 className="fw-bold text-white">2k+</h2>
-                            <p className="text-muted mb-0">Happy Clients</p>
-                        </div>
-                    </Col>
-                </Row>
+            {/* 4. Simple Stats - Minimalist */}
+            <section className="py-5 border-top border-dark">
+                <Container>
+                    <Row className="text-center g-4">
+                        {[
+                            { value: "20,000", label: "Square Feet" },
+                            { value: "2,500+", label: "Active Members" },
+                            { value: "15", label: "Elite Trainers" },
+                            { value: "24/7", label: "Access" }
+                        ].map((item, idx) => (
+                            <Col xs={6} md={3} key={idx}>
+                                <h2 className="display-4 fw-bold text-white mb-0">{item.value}</h2>
+                                <p className="text-primary text-uppercase letter-spacing-2 small fw-bold">{item.label}</p>
+                            </Col>
+                        ))}
+                    </Row>
+                </Container>
+            </section>
 
-                {/* Values Section */}
-                <div className="text-center mb-5">
-                    <h2 className="fw-bold text-white display-5">WHY CHOOSE <span className="text-neon">T2K?</span></h2>
-                    <p className="text-muted">We provide the tools; you bring the sweat.</p>
-                </div>
-                <Row className="mb-5">
-                    <Col md={4} className="mb-4">
-                        <Card className="h-100 p-4 bg-dark text-white border-secondary hover-lift">
-                            <div className="text-neon fs-1 mb-3"><FaDumbbell /></div>
-                            <h4 className="fw-bold mb-3">Elite Equipment</h4>
-                            <p className="text-muted">
-                                Train with the best. Our floor is stocked with Hammer Strength, Rogue Fitness, and Life Fitness equipment, maintained daily for your safety and performance.
-                            </p>
-                        </Card>
-                    </Col>
-                    <Col md={4} className="mb-4">
-                        <Card className="h-100 p-4 bg-dark text-white border-secondary hover-lift">
-                            <div className="text-neon fs-1 mb-3"><FaUsers /></div>
-                            <h4 className="fw-bold mb-3">Vibrant Community</h4>
-                            <p className="text-muted">
-                                Join a tribe of like-minded individuals. We foster a culture of respect, encouragement, and healthy competition that pushes you further.
-                            </p>
-                        </Card>
-                    </Col>
-                    <Col md={4} className="mb-4">
-                        <Card className="h-100 p-4 bg-dark text-white border-secondary hover-lift">
-                            <div className="text-neon fs-1 mb-3"><FaCheckCircle /></div>
-                            <h4 className="fw-bold mb-3">Proven Results</h4>
-                            <p className="text-muted">
-                                Our programs are science-backed and results-driven. Whether you want to lose weight, build muscle, or improve agility, we have the roadmap.
-                            </p>
-                        </Card>
-                    </Col>
-                </Row>
-            </Container>
+            <style>
+                {`
+                    .object-fit-cover { object-fit: cover; }
+                `}
+            </style>
         </div>
     );
 };
