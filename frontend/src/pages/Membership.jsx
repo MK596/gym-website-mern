@@ -72,9 +72,9 @@ const Membership = () => {
                                     )}
                                     <Card.Body className="p-5 d-flex flex-column text-center">
                                         <h4 className="text-white text-uppercase fw-bold letter-spacing-2 mb-2">{plan.name}</h4>
-                                        <div className="display-2 fw-bold text-primary mb-4">
-                                            <sup className="fs-4 text-secondary align-top me-1">$</sup>
-                                            {billingCycle === 'yearly' ? (plan.price * 10).toFixed(0) : plan.price}
+                                        <div className="display-2 fw-bold text-primary mb-4 d-flex align-items-start justify-content-center">
+                                            <span className="currency-symbol">$</span>
+                                            <span className="price-value">{billingCycle === 'yearly' ? (plan.price * 10).toFixed(0) : plan.price}</span>
                                         </div>
                                         <p className="text-secondary small text-uppercase letter-spacing-1 mb-5 border-bottom border-dark pb-3">
                                             Billed {billingCycle}
@@ -121,6 +121,23 @@ const Membership = () => {
                     .shadow-glow { box-shadow: 0 0 30px rgba(var(--primary-rgb), 0.2); }
                     .text-outline-white { -webkit-text-stroke: 1px rgba(255,255,255,0.8); }
                     .transition-all { transition: all 0.3s ease; }
+                    
+                    .currency-symbol {
+                        font-size: 1.5rem;
+                        color: rgba(255, 255, 255, 0.5);
+                        margin-top: 1rem;
+                        margin-right: 4px;
+                        font-weight: 600;
+                    }
+                    
+                    .price-value {
+                        line-height: 1;
+                    }
+                    
+                    @media (max-width: 768px) {
+                        .display-2 { font-size: 3.5rem; }
+                        .currency-symbol { font-size: 1.2rem; margin-top: 0.8rem; }
+                    }
                 `}
             </style>
         </div>
