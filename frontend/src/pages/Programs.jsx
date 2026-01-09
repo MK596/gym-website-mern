@@ -66,6 +66,7 @@ const Programs = () => {
                                             variant="top"
                                             src={program.image}
                                             className="h-100 w-100"
+                                            loading="lazy"
                                             style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }}
                                         />
                                         <div className="position-absolute top-0 end-0 p-3">

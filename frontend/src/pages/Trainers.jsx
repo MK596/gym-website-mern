@@ -44,6 +44,7 @@ const Trainers = () => {
                                             variant="top"
                                             src={trainer.image}
                                             className="h-100 w-100 position-relative"
+                                            loading="lazy"
                                             style={{ objectFit: 'cover', zIndex: 1 }}
                                         />
                                         <div className="position-absolute bottom-0 start-0 w-100 p-4 bg-gradient-to-t from-black" style={{ zIndex: 2, background: 'linear-gradient(to top, rgba(0,0,0,0.9), transparent)' }}>

@@ -28,9 +28,10 @@ const About = () => {
             {/* 2. Cinematic Image Strip */}
             <section className="w-100 my-5" style={{ height: '400px', overflow: 'hidden' }}>
                 <img
-                    src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop"
+                    src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=60&w=1600&auto=format&fit=crop"
                     alt="Gym Interior"
                     className="w-100 h-100 object-fit-cover"
+                    loading="lazy"
                     style={{ objectFit: 'cover' }}
                 />
             </section>

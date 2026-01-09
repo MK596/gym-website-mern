@@ -9,7 +9,7 @@ const Home = () => {
             {/* Hero Section - High Impact */}
             <section className="hero-section position-relative d-flex align-items-center" style={{ minHeight: '100vh', overflow: 'hidden' }}>
                 <div className="position-absolute w-100 h-100 top-0 start-0" style={{
-                    backgroundImage: "url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=2069&auto=format&fit=crop')",
+                    backgroundImage: "url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=60&w=1600&auto=format&fit=crop')",
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     filter: 'contrast(1.1) brightness(0.6)'
@@ -72,9 +72,10 @@ const Home = () => {
                             <div className="position-relative ps-4 pt-4">
                                 <div className="position-absolute top-0 start-0 w-75 h-75 border-start border-top border-primary border-3"></div>
                                 <img
-                                    src="https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=2069&auto=format&fit=crop"
+                                    src="https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=60&w=1200&auto=format&fit=crop"
                                     alt="Gym Floor"
                                     className="img-fluid position-relative shadow-lg transition-all"
+                                    loading="lazy"
                                     style={{ zIndex: 1, filter: 'brightness(0.9)' }}
                                 />
                             </div>
