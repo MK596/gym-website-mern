@@ -33,8 +33,6 @@ const Header = () => {
                     <span className="fw-bold fs-3 text-white tracking-widest">T2K<span className="text-primary">GYM</span></span>
                 </Navbar.Brand>
 
-                <Navbar.Toggle aria-controls="basic-navbar-nav" className="border-0 text-white d-lg-none" />
-
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mx-auto mb-2 mb-lg-0 d-none d-lg-flex">
                         {['Home', 'About', 'Programs', 'Trainers'].map((item) => (
