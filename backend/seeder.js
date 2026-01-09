@@ -4,7 +4,6 @@ const connectDB = require('./config/db');
 const Program = require('./models/Program');
 const Trainer = require('./models/Trainer');
 const Membership = require('./models/Membership');
-const User = require('./models/User');
 
 dotenv.config();
 
@@ -167,51 +166,17 @@ const memberships = [
     }
 ];
 
-const users = [
-    {
-        name: 'Admin User',
-        email: 'admin@example.com',
-        password: 'adminpassword',
-        isAdmin: true,
-        membershipStatus: 'Active',
-        membershipPlan: 'Elite'
-    },
-    {
-        name: 'John Doe',
-        email: 'john@example.com',
-        password: 'password123',
-        isAdmin: false,
-        membershipStatus: 'Active',
-        membershipPlan: 'Standard'
-    },
-    {
-        name: 'Jane Smith',
-        email: 'jane@example.com',
-        password: 'password123',
-        isAdmin: false,
-        membershipStatus: 'Inactive',
-        membershipPlan: 'None'
-    }
-];
-
 const importData = async () => {
     try {
         await Program.deleteMany();
         await Trainer.deleteMany();
         await Membership.deleteMany();
-        await User.deleteMany(); // Reset Users
 
         await Program.insertMany(programs);
         await Trainer.insertMany(trainers);
         await Membership.insertMany(memberships);
 
-        // Users are saved individually to trigger the pre-save hook for password hashing
-        for (const user of users) {
-            const newUser = new User(user);
-            await newUser.save();
-        }
-
-        console.log('Data Imported! Admin User: admin@example.com / adminpassword');
+        console.log('Data Imported successfully!');
         process.exit();
     } catch (error) {
         console.error(`${error}`);

@@ -12,28 +12,28 @@ const Home = () => {
                     backgroundImage: "url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=2069&auto=format&fit=crop')",
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    filter: 'grayscale(100%) contrast(1.1) brightness(0.6)'
+                    filter: 'contrast(1.1) brightness(0.6)'
                 }}></div>
                 <div className="position-absolute w-100 h-100 top-0 start-0 bg-gradient-to-r" style={{ background: 'linear-gradient(90deg, #050505 0%, rgba(5,5,5,0.85) 40%, rgba(5,5,5,0.2) 100%)' }}></div>
 
                 <Container className="position-relative z-1 pt-5">
                     <Row>
-                        <Col lg={8} className="pt-5">
-                            <h5 className="text-primary text-uppercase letter-spacing-3 fw-bold mb-3 animate__animated animate__fadeInDown">Welcome to T2K Gym</h5>
-                            <h1 className="display-1 fw-bold text-white mb-4 text-uppercase lh-1 animate__animated animate__fadeInLeft" style={{ fontSize: '5rem' }}>
+                        <Col lg={8} className="pt-5 px-4 px-md-3">
+                            <h5 className="text-primary text-uppercase letter-spacing-3 fw-bold mb-3 animate__animated animate__fadeInDown" style={{ fontSize: '0.8rem' }}>Welcome to T2K Gym</h5>
+                            <h1 className="display-1 fw-bold text-white mb-4 text-uppercase lh-1 animate__animated animate__fadeInLeft hero-title" style={{ fontSize: 'calc(2.5rem + 3vw)' }}>
                                 Build Your <br />
                                 <span className="text-outline-primary" style={{ color: 'transparent', WebkitTextStroke: '2px var(--primary-color)' }}>Legacy</span> Today
                             </h1>
-                            <p className="lead text-secondary fs-4 mb-5 animate__animated animate__fadeInUp" style={{ maxWidth: '600px' }}>
+                            <p className="lead text-secondary mb-5 animate__animated animate__fadeInUp hero-text" style={{ maxWidth: '600px', fontSize: '1.1rem' }}>
                                 Premium equipment. Expert coaching. Unmatched atmosphere.
                                 Stop starting over. Start evolving.
                             </p>
-                            <div className="d-flex gap-3 animate__animated animate__fadeInUp">
-                                <Link to="/memberships">
-                                    <Button variant="primary" size="lg" className="rounded-0 px-5 py-3 text-uppercase fw-bold letter-spacing-1 hover-lift">Start Journey</Button>
+                            <div className="d-flex flex-column flex-sm-row gap-3 animate__animated animate__fadeInUp">
+                                <Link to="/memberships" className="w-100 w-sm-auto">
+                                    <Button variant="primary" size="lg" className="rounded-0 px-5 py-3 text-uppercase fw-bold letter-spacing-1 hover-lift w-100">Start Journey</Button>
                                 </Link>
-                                <Link to="/about">
-                                    <Button variant="outline-light" size="lg" className="rounded-0 px-5 py-3 text-uppercase fw-bold letter-spacing-1 hover-lift">Tour Club</Button>
+                                <Link to="/about" className="w-100 w-sm-auto">
+                                    <Button variant="outline-light" size="lg" className="rounded-0 px-5 py-3 text-uppercase fw-bold letter-spacing-1 hover-lift w-100">Tour Club</Button>
                                 </Link>
                             </div>
                         </Col>
@@ -74,10 +74,8 @@ const Home = () => {
                                 <img
                                     src="https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=2069&auto=format&fit=crop"
                                     alt="Gym Floor"
-                                    className="img-fluid position-relative shadow-lg grayscale-hover transition-all"
-                                    style={{ zIndex: 1, filter: 'grayscale(100%) brightness(0.9)' }}
-                                    onMouseOver={(e) => e.target.style.filter = 'grayscale(0%)'}
-                                    onMouseOut={(e) => e.target.style.filter = 'grayscale(100%) brightness(0.9)'}
+                                    className="img-fluid position-relative shadow-lg transition-all"
+                                    style={{ zIndex: 1, filter: 'brightness(0.9)' }}
                                 />
                             </div>
                         </Col>
@@ -171,7 +169,6 @@ const Home = () => {
                     .transform-scale-x-0 { transform: scaleX(0); }
                     .group-hover-scale-x-100:hover { transform: scaleX(1); } /* Requires JS or simpler CSS hover */
                     .service-card:hover .transform-scale-x-0 { transform: scaleX(1); }
-                    .grayscale-hover { transition: filter 0.3s ease; }
                     @media (max-width: 768px) {
                         .border-end { border-right: 0 !important; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 1rem; }
                         .last-no-border { border-bottom: 0 !important; }

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Card, Spinner, Alert, Badge } from 'react-bootstrap';
+import { Container, Row, Col, Card, Spinner, Alert, Badge, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { FaInstagram, FaTwitter, FaLinkedin, FaQuoteLeft, FaCertificate } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Trainers = () => {
     const [trainers, setTrainers] = useState([]);
@@ -56,7 +57,9 @@ const Trainers = () => {
 
                                     {/* Info */}
                                     <div className="text-center">
-                                        <h3 className="text-white text-uppercase fw-bold mb-1">{trainer.name}</h3>
+                                        <Link to={`/trainers/${trainer._id}`} className="text-decoration-none">
+                                            <h3 className="text-white text-uppercase fw-bold mb-1 hover-primary transition-all">{trainer.name}</h3>
+                                        </Link>
                                         <p className="text-primary text-uppercase letter-spacing-2 small mb-3">{trainer.specialization}</p>
 
                                         <div className="d-flex justify-content-center mb-4">
@@ -64,13 +67,19 @@ const Trainers = () => {
                                             <p className="text-secondary small fst-italic mb-0" style={{ maxWidth: '80%' }}>"{trainer.bio.substring(0, 80)}..."</p>
                                         </div>
 
-                                        <div className="d-flex flex-wrap justify-content-center gap-2">
+                                        <div className="d-flex flex-wrap justify-content-center gap-2 mb-4">
                                             {trainer.certifications && trainer.certifications.slice(0, 2).map((cert, index) => (
                                                 <Badge key={index} bg="dark" className="border border-secondary fw-normal text-secondary rounded-0 px-2 py-1">
                                                     <FaCertificate className="me-1 text-primary" size={10} /> {cert}
                                                 </Badge>
                                             ))}
                                         </div>
+
+                                        <Link to={`/trainers/${trainer._id}`}>
+                                            <Button variant="outline-primary" className="rounded-0 text-uppercase fw-bold letter-spacing-1 px-4">
+                                                View Profile
+                                            </Button>
+                                        </Link>
                                     </div>
                                 </Card>
                             </Col>

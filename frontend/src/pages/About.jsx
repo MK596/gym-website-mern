@@ -31,7 +31,7 @@ const About = () => {
                     src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop"
                     alt="Gym Interior"
                     className="w-100 h-100 object-fit-cover"
-                    style={{ filter: 'grayscale(100%)', objectFit: 'cover' }}
+                    style={{ objectFit: 'cover' }}
                 />
             </section>
 

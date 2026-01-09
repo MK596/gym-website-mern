@@ -33,10 +33,10 @@ const Header = () => {
                     <span className="fw-bold fs-3 text-white tracking-widest">T2K<span className="text-primary">GYM</span></span>
                 </Navbar.Brand>
 
-                <Navbar.Toggle aria-controls="basic-navbar-nav" className="border-0 text-white" />
+                <Navbar.Toggle aria-controls="basic-navbar-nav" className="border-0 text-white d-lg-none" />
 
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mx-auto mb-2 mb-lg-0">
+                    <Nav className="mx-auto mb-2 mb-lg-0 d-none d-lg-flex">
                         {['Home', 'About', 'Programs', 'Trainers'].map((item) => (
                             <Nav.Link
                                 key={item}
@@ -49,7 +49,7 @@ const Header = () => {
                             </Nav.Link>
                         ))}
                     </Nav>
-                    <div className="d-flex gap-3">
+                    <div className="d-none d-lg-flex gap-3">
                         <Link to="/contact">
                             <Button variant="outline-light" className="text-uppercase fw-bold letter-spacing-1 rounded-0 px-4">Contact</Button>
                         </Link>
