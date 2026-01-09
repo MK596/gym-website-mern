@@ -28,9 +28,11 @@ const Header = () => {
             variant="dark"
         >
             <Container>
-                <Navbar.Brand as={Link} to="/" className="d-flex align-items-center gap-2">
-                    <FaDumbbell className="text-primary fs-3" />
-                    <span className="fw-bold fs-3 text-white tracking-widest">T2K<span className="text-primary">GYM</span></span>
+                <Navbar.Brand as={Link} to="/" className="d-flex align-items-center gap-2 py-0 mx-auto mx-lg-0">
+                    <FaDumbbell className="text-primary mobile-brand-icon animate-pulse-slow" />
+                    <span className="fw-bold text-white tracking-widest mobile-brand-text">
+                        T2K<span className="text-primary shimmer-text">GYM</span>
+                    </span>
                 </Navbar.Brand>
 
                 <Navbar.Collapse id="basic-navbar-nav">
@@ -68,6 +70,45 @@ const Header = () => {
                     }
                     .nav-item-custom.active::after, .nav-item-custom:hover::after { width: 100%; }
                     .tracking-widest { letter-spacing: 2px; }
+                    
+                    @media (max-width: 991px) {
+                        .navbar { 
+                            background: linear-gradient(to bottom, rgba(0,0,0,0.95), rgba(0,0,0,0.85)) !important;
+                            backdrop-filter: blur(15px) saturate(150%);
+                            padding-top: 0.8rem !important;
+                            padding-bottom: 0.8rem !important;
+                            border-bottom: 1px solid rgba(255, 77, 0, 0.1) !important;
+                        }
+                        .mobile-brand-icon { font-size: 1.4rem; }
+                        .mobile-brand-text { font-size: 1.2rem; letter-spacing: 3px; }
+                    }
+                    
+                    /* Shimmer & Animations */
+                    .shimmer-text {
+                        background: linear-gradient(90deg, var(--primary-color) 0%, #ff8a50 50%, var(--primary-color) 100%);
+                        background-size: 200% auto;
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        animation: shimmer 3s linear infinite;
+                    }
+                    
+                    @keyframes shimmer {
+                        to { background-position: 200% center; }
+                    }
+                    
+                    .animate-pulse-slow {
+                        animation: pulse-slow 3s ease-in-out infinite;
+                    }
+                    
+                    @keyframes pulse-slow {
+                        0%, 100% { opacity: 1; transform: scale(1); }
+                        50% { opacity: 0.8; transform: scale(0.95); }
+                    }
+                    
+                    @media (min-width: 992px) {
+                        .mobile-brand-icon { font-size: 1.8rem; }
+                        .mobile-brand-text { font-size: 1.75rem; }
+                    }
                 `}
             </style>
         </Navbar>
